@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 	before_action :verify_logged_in, except: [:show]
 	before_action :find_and_verify_user, only: [:edit, :update, :destroy]
-  def show
+	skip_before_action :verify_authenticity_token, only: [:create, :edit, :update, :destroy]
+
+	def show
     @post = Post.find_by_id(params[:id])
 		@user = User.find_by_id(@post.user_id)
   end

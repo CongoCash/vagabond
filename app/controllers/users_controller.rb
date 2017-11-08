@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :verify_user, only: [:edit, :update]
+  skip_before_action :verify_authenticity_token, only: [:create, :edit, :update]
+
   def index
     @users = Array.new
     User.all[0..5].each do |user|

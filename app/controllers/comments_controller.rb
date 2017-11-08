@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
 	before_action :verify_logged_in, except: [:show]
 	before_action :find_and_verify_user, only: [:edit, :update, :destroy]
+	skip_before_action :verify_authenticity_token, only: [:create, :edit, :update, :destroy]
+
 	def new
 		@comment = Comment.new
 		@post = Post.find(params[:id])
